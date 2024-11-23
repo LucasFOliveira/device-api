@@ -1,7 +1,5 @@
 package com.example.device.database;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -19,8 +17,8 @@ public class LoadDatabase {
 	@Bean
 	CommandLineRunner initDatabase(DeviceRepository repository) {
 		return args -> {
-			log.info("Preloading " + repository.save(new Device("Smart TV", "LG", new Date())));
-			log.info("Preloading " + repository.save(new Device("Soundbar", "Samsung", new Date())));
+			log.info("Preloading " + repository.save(new Device("Smart TV", "LG")));
+			log.info("Preloading " + repository.save(new Device("Soundbar", "Samsung")));
 		};
 	}
 }
