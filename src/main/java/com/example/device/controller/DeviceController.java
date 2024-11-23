@@ -36,6 +36,12 @@ public class DeviceController {
 	Device one(@PathVariable Long id) {   
 		return repository.findById(id).orElseThrow(() -> new DeviceNotFoundException(id));
 	}
+	
+	@GetMapping("devices/searchByBrand")
+    public List<Device> searchDevices(String brand) {
+        List<Device> devices = repository.findByBrandContainingIgnoreCase(brand);
+        return devices.stream().toList();
+    }
 
 	@PutMapping("/devices/{id}")
 	Device replaceDevice(@RequestBody Device newDevice, @PathVariable Long id) {
