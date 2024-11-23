@@ -8,6 +8,7 @@ import com.example.device.exception.DeviceNotFoundException;
 import com.example.device.model.Device;
 import com.example.device.repository.DeviceRepository;
 
+@RequestMapping("/devices")
 @RestController
 public class DeviceController {
 	
@@ -17,34 +18,29 @@ public class DeviceController {
 		this.repository = repository;
 	}
 
-	// Aggregate root
-	// tag::get-aggregate-root[]
-	@GetMapping("/devices")
-	List<Device> all() {
+	@GetMapping()
+	List<Device> list() {
 		return repository.findAll();
 	}
-	// end::get-aggregate-root[]
 
-	@PostMapping("/devices")
-	Device newDevice(@RequestBody Device newDevice) {
+	@PostMapping()
+	Device create(@RequestBody Device newDevice) {
 		return repository.save(newDevice);
 	}
 
-	// Single item
-	  
-	@GetMapping("/devices/{id}")
-	Device one(@PathVariable Long id) {   
+	@GetMapping("/{id}")
+	Device read(@PathVariable Long id) {   
 		return repository.findById(id).orElseThrow(() -> new DeviceNotFoundException(id));
 	}
 	
-	@GetMapping("devices/searchByBrand")
-    public List<Device> searchDevices(String brand) {
+	@GetMapping("/searchByBrand")
+    List<Device> searchByBrand(String brand) {
         List<Device> devices = repository.findByBrandContainingIgnoreCase(brand);
         return devices.stream().toList();
     }
 
-	@PutMapping("/devices/{id}")
-	Device replaceDevice(@RequestBody Device newDevice, @PathVariable Long id) {
+	@PutMapping("/{id}")
+	Device update(@RequestBody Device newDevice, @PathVariable Long id) {
 		return repository.findById(id)
 			.map(device -> {
 				device.setName(newDevice.getName());
@@ -55,8 +51,8 @@ public class DeviceController {
 			});
 	}
 
-	@DeleteMapping("/devices/{id}")
-	void deleteDevice(@PathVariable Long id) {
+	@DeleteMapping("/{id}")
+	void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
 }
