@@ -26,11 +26,38 @@ public class Device {
 		this.brand = brand;
 		this.creation = new Date();
 	}
+	
+	/**
+	 * @param id
+	 * @param name
+	 * @param brand
+	 * @param creation
+	 */
+	public Device(Long id, String name, String brand, Date creation) {
+		this.id = id;
+		this.name = name;
+		this.brand = brand;
+		this.creation = creation;
+	}
 
 	/**
 	 * Abstract constructor
 	 */
 	public Device() {}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the name
