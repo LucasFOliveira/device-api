@@ -18,8 +18,6 @@ public class DeviceController {
 	@Autowired
 	private DeviceService deviceService;
 
-	DeviceController() {}
-
 	@GetMapping()
 	List<Device> allDevices() {
 		List<Device> devices = deviceService.list();
