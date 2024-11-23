@@ -21,10 +21,10 @@ public class Device {
 	 * @param brand
 	 * @param creation
 	 */
-	public Device(String name, String brand, Date creation) {
+	public Device(String name, String brand) {
 		this.name = name;
 		this.brand = brand;
-		this.creation = creation;
+		this.creation = new Date();
 	}
 
 	/**
